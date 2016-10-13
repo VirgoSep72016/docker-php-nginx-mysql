@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  nginx:
+    extends:
+      file: dev-share.yml
+      service: nginx
+    links:
+      - php
+    volumes:
+      - ./project:/etc/www/project
+      - ./docker_config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker_config/nginx/conf.d/project_conf:/etc/nginx/conf.d/project_conf
+
+  php:
+    extends:
+      file: dev-share.yml
+      service: php
+    volumes:
+      - ./project/php_project/:/etc/www/project/php_project
+    links:
+      - mysql
+
+  mysql:
+    extends:
+      file: dev-share.yml
+      service: mysql
+
+  phpmyadmin:
+    extends:
+      file: dev-share.yml
+      service: phpmyadmin
+    links:
+      - mysql:db

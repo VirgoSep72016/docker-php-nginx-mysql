@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  nginx:
+    image: nginx:latest
+    environment:
+      uid: "$UID"
+      gid: "$GID"
+    ports:
+      - 8080:80
+
+  php:
+    build: ./docker_config/php/
+    expose:
+      - 9000
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - 8081:80
