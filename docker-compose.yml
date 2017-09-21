@@ -8,9 +8,9 @@ services:
     links:
       - php
     volumes:
-      - ./project:/etc/www/project
-      - ./docker_config/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker_config/nginx/conf.d/project_conf:/etc/nginx/conf.d/project_conf
+      - ${NGINX_PROJECT}:/etc/www/project
+      - ${NGINX_CONFIG}:/etc/nginx/nginx.conf
+      - ${NGINX_PROJECT_CONFIG}:/etc/nginx/conf.d/project_conf
 
   php:
     extends:
